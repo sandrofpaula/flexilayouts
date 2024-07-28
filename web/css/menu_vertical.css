@@ -1,0 +1,80 @@
+/* \giiwizard\web\css\menu_vertical.css */
+
+.container, .container-lg, .container-md, .container-sm, .container-xl {
+    max-width: 1500px;
+}
+.vertical-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 250px;
+    position: fixed;
+    top: 56px; /* Ajuste conforme a altura do seu navbar */
+    left: 0;
+    height: 100%;
+    overflow-y: auto;
+    background-color: #343a40;
+    transition: width 0.3s;
+}
+.vertical-nav.collapsed {
+    width: 70px;
+}
+.vertical-nav > li {
+    margin-bottom: 10px;
+}
+.vertical-nav .nav-link {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: #fff;
+    text-decoration: none;
+}
+.vertical-nav .nav-link .icon {
+    margin-right: 10px;
+}
+.vertical-nav.collapsed .nav-link .link-text {
+    display: none;
+}
+.vertical-nav .nav-link:hover {
+    background-color: #495057;
+}
+.vertical-nav .submenu {
+    list-style: none;
+    padding-left: 20px;
+    display: none;
+}
+.vertical-nav .submenu.show {
+    display: block;
+}
+.vertical-nav.collapsed .submenu {
+    display: none;
+}
+.content {
+    margin-left: 250px; /* Adjust based on the width of the sidebar */
+    padding: 20px;
+    transition: margin-left 0.3s;
+}
+.content.collapsed {
+    margin-left: 70px;
+}
+.footer {
+    transition: margin-left 0.3s;
+    margin-left: 250px; /* Adjust based on the width of the sidebar */
+}
+.footer.collapsed {
+    margin-left: 70px;
+}
+.toggle-btn {
+    background-color: #303438;
+    color: white;
+    border: none;
+    /* padding: 10px; */
+    cursor: pointer;
+    margin-right: 10px; /* Ajuste a margem conforme necessário */
+}
+.vertical-nav.collapsed + .toggle-btn {
+    left: 80px;
+}
+.vertical-nav.collapsed > li:first-child {
+    margin-top: 20px; /* Adjust this value as needed */
+}

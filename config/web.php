@@ -3,10 +3,26 @@
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
+// Leitura do Arquivo JSON para Seleção de Layout
+$layoutConfigPath = __DIR__ . '/../web/data/layout_config.json';
+$selectedLayout = 'main'; // Default layout
+
+if (file_exists($layoutConfigPath)) {
+    $layoutConfig = json_decode(file_get_contents($layoutConfigPath), true);
+    $selectedLayoutId = $layoutConfig['selected'] ?? 1;
+    $selectedLayout = array_filter($layoutConfig['layouts'], function($layout) use ($selectedLayoutId) {
+        return $layout['id'] == $selectedLayoutId;
+    });
+    $selectedLayout = reset($selectedLayout);
+    $selectedLayout = $selectedLayout['arquivo'] ?? 'main';
+}
+/////
 $config = [
-    'id' => 'basic',
+    'id' => 'flexilayouts',
+    'name' => 'Flexilayouts',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'layout' => $selectedLayout, // Define o layout selecionado
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -42,14 +58,14 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
+        
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
+        
     ],
     'params' => $params,
 ];
