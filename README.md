@@ -9,13 +9,33 @@
 | Passo | Descrição em Português - BR | Descrição em Inglês |
 |-------|-----------------------------|---------------------|
 | 1     | Criar pasta `data` na pasta `web`. | Create a `data` folder inside the `web` folder. |
-| 2     | Criar o arquivo `layout_config.json` dentro da pasta `data`. | Create the `layout_config.json` file inside the `data` folder. |
+| 2     | Criar o arquivo `layout_config.json` dentro da pasta `data` com o seguinte conteúdo: <br><br> ```json { "layouts": [ { "id": 1, "arquivo": "main_horizontal" }, { "id": 2, "arquivo": "main_vertical" } ], "selected": 1 }``` | Create the `layout_config.json` file inside the `data` folder with the following content: <br><br> ```json { "layouts": [ { "id": 1, "arquivo": "main_horizontal" }, { "id": 2, "arquivo": "main_vertical" } ], "selected": 1 }``` |
 | 3     | Criar o arquivo `LayoutConfigController.php` na pasta `controllers` com o código. | Create the `LayoutConfigController.php` file in the `controllers` folder with the code. |
 | 4     | Criar o arquivo `LayoutConfig.php` na pasta `models` com o código. | Create the `LayoutConfig.php` file in the `models` folder with the code. |
 | 5     | Criar as views `index.php`, `create.php`, `update.php` na pasta `layout-config`. | Create the `index.php`, `create.php`, `update.php` views in the `layout-config` folder. |
 | 6     | Ajustar o arquivo de configuração `config/web.php`. | Adjust the `config/web.php` configuration file. |
 | 7     | Criar os arquivos de layout `main_horizontal.php` e `main_vertical.php` na pasta `views/layouts`. | Create the `main_horizontal.php` and `main_vertical.php` layout files in the `views/layouts` folder. |
 | 8     | Criar o arquivo `menu_vertical.css` na pasta `web/css`. | Create the `menu_vertical.css` file in the `web/css` folder. |
+
+### Passo 2: Criar o arquivo [layout_config.json]
+
+Dentro da pasta `data`, crie o arquivo `layout_config.json` com o seguinte conteúdo:
+
+```json
+{
+    "layouts": [
+        {
+            "id": 1,
+            "arquivo": "main_horizontal"
+        },
+        {
+            "id": 2,
+            "arquivo": "main_vertical"
+        }
+    ],
+    "selected": 1
+}
+```
 
 ### Código para o Passo 3: LayoutConfigController.php
 
@@ -249,7 +269,9 @@ $this->title = 'Configuração de Layout';
             'arquivo',
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{select} {update} {delete}',
+                'template' => '{select} {
+
+update} {delete}',
                 'buttons' => [
                     'select' => function($url, $layoutModel, $key) use ($model) {
                         $isSelected = $layoutModel['id'] == $model->selected;
@@ -260,9 +282,7 @@ $this->title = 'Configuração de Layout';
                     'update' => function($url, $layoutModel, $key) {
                         return Html::a('<i class="fas fa-edit"></i>', ['update', 'id' => $layoutModel['id']], ['class' => 'btn btn-primary', 'title' => 'Atualizar']);
                     },
-                    'delete
-
-' => function($url, $layoutModel, $key) {
+                    'delete' => function($url, $layoutModel, $key) {
                         return Html::a('<i class="fas fa-trash"></i>', ['delete', 'id' => $layoutModel['id']], [
                             'class' => 'btn btn-danger',
                             'title' => 'Deletar',
@@ -447,8 +467,6 @@ $config = [
     margin-top: 20px; /* Adjust this value as needed */
 }
 ```
-
-
 
 -------------------
 Yii 2 Basic Project Template is a skeleton [Yii 2](https://www.yiiframework.com/) application best for
